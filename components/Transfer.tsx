@@ -180,7 +180,11 @@ export const SendTransaction: FC = () => {
               <p>loading</p>
             ) : (
               <>
-                {balance ? <p>Sender's Remaining balance: {balance}</p> : ""}
+                {balance ? (
+                  <p>Sender&apos;s Remaining balance: {balance}</p>
+                ) : (
+                  ""
+                )}
                 <br />
                 {signature && (
                   <p className="break-words font-mono ">
