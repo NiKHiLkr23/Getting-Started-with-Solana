@@ -1,4 +1,4 @@
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   Connection,
   Keypair,
@@ -14,6 +14,7 @@ import base58 from "bs58";
 import { FC, useEffect, useState } from "react";
 
 export const SendTransaction: FC = () => {
+  const { connection } = useConnection();
   const [frompublicKey, setFromPublicKey] = useState("");
   const [fromprivateKey, setFromPrivateKey] = useState("");
   const [toPublicKey, setToPublicKey] = useState(String);
@@ -24,8 +25,6 @@ export const SendTransaction: FC = () => {
   const [signature, setSignature] = useState("");
 
   const { publicKey } = useWallet();
-
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
   async function transfer() {
     try {
@@ -42,6 +41,7 @@ export const SendTransaction: FC = () => {
       setMessage("");
       setLoading(true);
 
+      const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
       const fromSecretKey = Uint8Array.from(base58.decode(fromprivateKey));
       const from = Keypair.fromSecretKey(fromSecretKey);
 
