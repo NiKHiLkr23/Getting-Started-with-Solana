@@ -72,7 +72,11 @@ export default function Balance() {
             <p className="p-2  text-xs font-serif text-red-500">{message}</p>
           </div>
           <div className="col-span-5 flex md:flex-col md:col-span-1">
-            <p>Balance:</p>
+            {loading ? (
+              <div className="w-10 h-10 border-4 border-dashed rounded-full animate-spin border-violet-400"></div>
+            ) : (
+              <p>Balance:</p>
+            )}
             {balance > 0 && (
               <p className="flex ml-5 md:ml-0 md:mt-3 md:text-lg font-mono grow">
                 {balance} SOL

@@ -4,7 +4,6 @@ import {
   Keypair,
   SystemProgram,
   Transaction,
-  TransactionSignature,
   clusterApiUrl,
   PublicKey,
   LAMPORTS_PER_SOL,
@@ -32,7 +31,7 @@ export const SendTransaction: FC = () => {
       if (!frompublicKey) {
         throw new Error("Please enter a valid public key.");
       }
-      if (!frompublicKey) {
+      if (!fromprivateKey) {
         throw new Error("Please enter a valid private key.");
       }
       if (!toPublicKey) {
@@ -45,7 +44,7 @@ export const SendTransaction: FC = () => {
       const fromSecretKey = Uint8Array.from(base58.decode(fromprivateKey));
       const from = Keypair.fromSecretKey(fromSecretKey);
 
-      // Send money from "from" wallet and into "to" wallet
+      // Send money from "from"( sender ) wallet and into "to" ( receiver ) wallet
       const transaction = new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: new PublicKey(frompublicKey),
@@ -177,7 +176,7 @@ export const SendTransaction: FC = () => {
           </button>
           <div className="col-span-5 md:col-start-2 md:col-span-3">
             {loading ? (
-              <p>loading</p>
+              <div className="w-10 h-10 border-4 border-dashed rounded-full animate-spin border-violet-400"></div>
             ) : (
               <>
                 {balance ? (

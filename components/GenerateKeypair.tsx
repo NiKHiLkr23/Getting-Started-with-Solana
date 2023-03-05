@@ -8,6 +8,7 @@ import {
 } from "@solana/web3.js";
 import { useState } from "react";
 import base58 from "bs58";
+
 const GenerateKeypair: React.FC = () => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -19,8 +20,8 @@ const GenerateKeypair: React.FC = () => {
     const privateKey = newPair.secretKey;
     setPublicKey(publicKey);
     setPrivateKey(base58.encode(privateKey));
-    console.log("keypair generated, PublicKey: ", publicKey);
 
+    // Function to Aridrop 2 SOL
     const airdrop = async () => {
       let signature: TransactionSignature = "";
       try {
